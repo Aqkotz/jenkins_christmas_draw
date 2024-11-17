@@ -62,8 +62,8 @@ const giftersMap = {
 };
 
 // Helper function to send an email
-async function sendEmail(gifter, recipient, assignments, testingMode) {
-    const emails = testingMode ? ["andy.lyme@mac.com"] : giftersMap[gifter].map(name => emailMap[name]);
+async function sendEmail(gifter, recipient, assignments, testingMode, testingEmail) {
+    const emails = testingMode ? [testingEmail] : giftersMap[gifter].map(name => emailMap[name]);
     const drawnBy = Object.keys(assignments).find(key => assignments[key] === gifter) || "Unknown -- Contact Andy";
 
     const htmlContent = `
@@ -151,7 +151,7 @@ function generateGiftAssignments() {
 
 // API endpoint
 app.post('/generate-assignments', async (req, res) => {
-    const { testingMode } = req.body;
+    const { testingMode, testingEmail } = req.body;
 
     if (typeof testingMode !== 'boolean') {
         return res.status(400).json({ message: "Invalid 'testingMode' value. It must be a boolean." });
@@ -174,10 +174,10 @@ app.post('/generate-assignments', async (req, res) => {
     for (const [gifter, recipient] of Object.entries(assignments)) {
         console.log(`Sending email... Gifter: ${gifter}, Recipient: ${recipient}`);
         if (!testingMode) {
-            await sendEmail(gifter, recipient, assignments, testingMode);
+            await sendEmail(gifter, recipient, assignments, testingMode, "");
         }
         else if (ct === 0) {
-            await sendEmail(gifter, recipient, assignments, testingMode);
+            await sendEmail(gifter, recipient, assignments, testingMode, testingEmail);
             ct++;
         }
     }
