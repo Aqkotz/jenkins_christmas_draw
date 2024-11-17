@@ -1,0 +1,24 @@
+{
+  "name": "jenkins_christmas_draw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run dev",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aqkotz/jenkins_christmas_draw.git"
+  },
+  "author": "Andy Kotz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aqkotz/jenkins_christmas_draw/issues"
+  },
+  "homepage": "https://github.com/Aqkotz/jenkins_christmas_draw#readme",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.4",
+    "express.js": "^1.0.0"
+  }
+}
