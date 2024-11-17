@@ -76,7 +76,7 @@ async function sendEmail(gifter, recipient, assignments, testingMode) {
 
     const message = {
         to: emails,
-        from: "andy.lyme@mac.com",
+        from: "jenkinschristmasbot@gmail.com",
         subject: 'Your Jenkins Family Christmas Gift Assignment',
         html: htmlContent,
     };
