@@ -170,9 +170,16 @@ app.post('/generate-assignments', async (req, res) => {
         console.log(assignments);
     }
 
+    let ct = 0;
     for (const [gifter, recipient] of Object.entries(assignments)) {
         console.log(`Sending email... Gifter: ${gifter}, Recipient: ${recipient}`);
-        await sendEmail(gifter, recipient, assignments, testingMode);
+        if (!testingMode) {
+            await sendEmail(gifter, recipient, assignments, testingMode);
+        }
+        else if (ct === 0) {
+            await sendEmail(gifter, recipient, assignments, testingMode);
+            ct++;
+        }
     }
 
     res.json({ message: "Gift assignments generated and emails sent." });
